@@ -1,0 +1,54 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace = "com.example.online_sell_admin_panel"
+    compileSdk = 33
+    ndkVersion = "21.1.6352462"  // Adjust as needed
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    defaultConfig {
+        applicationId = "com.example.online_sell_admin_panel"
+        minSdk = 21
+        targetSdk = 33
+        versionCode = 1
+        versionName = "1.0"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('keystore/my-release-key.keystore')
+            storePassword '123456'  // Replace with your actual password
+            keyAlias 'my-key-alias'  // Replace with your actual alias
+            keyPassword '123456'     // Replace with your actual key password
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            shrinkResources false
+        }
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.6.0'
+}
+
+flutter {
+    source = "../.."
+}
